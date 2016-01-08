@@ -3,33 +3,38 @@
 
 <head>
     <meta charset="utf-8">
-    <title>idle</title>
+    <title>humans</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="idle.js"></script>
 </head>
 
 <body>
-    <div>
-        <i class="fa fa-user"></i>
-        <span class="idling"></span>
-        <i class="fa fa-long-arrow-left"></i>
-        <i class="fa fa-users"></i>
-        <span class="sexing"></span>
-        <button class="inc_sexing"><i class="fa fa-plus"></i></button>
-        <button class="dec_sexing"><i class="fa fa-minus"></i></button>
+    <div id="inventory">
+        <i class="fa fa-users"></i> <span class="humans"></span> (<span class="idling"></span>)
+        <i class="fa fa-apple"></i> <span class="food"></span>
     </div>
     <br>
     <div>
-        <i class="fa fa-shopping-cart"></i>
+        <button class="inc_sexing"><i class="fa fa-plus"></i></button>
+        <button class="dec_sexing"><i class="fa fa-minus"></i></button>
+        <i class="fa fa-users"></i> <span class="sexing"></span>
+        <i class="fa fa-long-arrow-right"></i>
+        <i class="fa fa-users"></i>
+    </div>
+    <br>
+    <div>
+        <button class="inc_farming"><i class="fa fa-plus"></i></button>
+        <button class="dec_farming"><i class="fa fa-minus"></i></button>
+        <i class="fa fa-users"></i> <span class="farming"></span>
+        <i class="fa fa-long-arrow-right"></i>
+        
+        <i class="fa fa-apple"></i>
         <span class="food"></span>
         <span class="food_diff_up" style="color:green;display:none"><i class="fa fa-arrow-up"></i></span>
         <span class="food_diff_down" style="color:red;display:none"><i class="fa fa-arrow-down"></i></span>
-        <i class="fa fa-long-arrow-left"></i>
-        <i class="fa fa-users"></i>
-        <span class="farming"></span>
-        <button class="inc_farming"><i class="fa fa-plus"></i></button>
-        <button class="dec_farming"><i class="fa fa-minus"></i></button>
+        <span class="food_diff"></span>
     </div>
 </body>
 

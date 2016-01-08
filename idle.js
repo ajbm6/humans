@@ -27,6 +27,9 @@ function loop() {
 }
 
 function refresh_display() {
+    $(".humans").html(humans());
+    $(".food_diff").html(food_diff);
+    
     $(".idling").html(idling);
     $(".sexing").html(sexing);
     $(".farming").html(farming);
