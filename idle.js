@@ -4,9 +4,45 @@ var humans = {
     farming:4,
     count: function() {
         return this.idling + this.sexing + this.farming;
+    },
+    assign: function(job, qty) {
+        if (qty > 0) {
+            var ch_qty = available_from_qty(this.idling, qty);
+            if (ch_qty > 0) {
+                switch(job) {
+                    case "sexing":
+                        this.idling -= ch_qty;
+                        this.sexing += ch_qty;
+                        break;
+                    case "farming":
+                        this.idling -= ch_qty;
+                        this.farming += ch_qty;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } else if (qty < 0) {
+            switch(job) {
+                case "sexing":
+                    var ch_qty = available_from_qty(this.sexing, -qty);
+                    this.sexing -= ch_qty;
+                    this.idling += ch_qty;
+                    break;
+                case "farming":
+                    var ch_qty = available_from_qty(this.farming, -qty);
+                    this.farming -= ch_qty;
+                    this.idling += ch_qty;
+                    break;
+                default:
+                    break;
+            }
+        }
+        refresh_display();
     }
 };
 
+var food = 0;
 var food_prod = '';
 var food_cons = '';
 var food_diff = '';
@@ -17,10 +53,10 @@ $(function() {
     refresh_display();
     setInterval(loop, 1000);
     
-    $("button.inc_sexing").click(function() {add_sexing()});
-    $("button.dec_sexing").click(function() {sub_sexing()});
-    $("button.inc_farming").click(function() {add_farming()});
-    $("button.dec_farming").click(function() {sub_farming()});
+    $("button.inc_sexing").click(function() { humans.assign("sexing",qty) });
+    $("button.dec_sexing").click(function() { humans.assign("sexing",-qty) });
+    $("button.inc_farming").click(function() { humans.assign("farming",qty) });
+    $("button.dec_farming").click(function() { humans.assign("farming",-qty) });
 
     $("button.change-qty-1").click(function() {setQty(1); });
     $("button.change-qty-10").click(function() {setQty(10); });
@@ -65,7 +101,7 @@ function refresh_display() {
     $(".idling").html(humans.idling);
     $(".sexing").html(humans.sexing);
     $(".farming").html(humans.farming);
-    $(".food").html(humans.food);
+    $(".food").html(food);
     
     $(".qty").html(qty);
     
@@ -102,42 +138,6 @@ function refresh_display() {
 
 function available_from_qty(f, q) {
     return f >= q ? q : f;
-}
-
-function add_sexing() {
-    var ch_qty = available_from_qty(humans.idling, qty);
-    if (ch_qty > 0) {
-        humans.idling -= ch_qty;
-        humans.sexing += ch_qty;
-        refresh_display();
-    }
-}
-
-function sub_sexing() {
-    var ch_qty = available_from_qty(humans.sexing, qty);
-    if (ch_qty > 0) {
-        humans.sexing -= ch_qty;
-        humans.idling += ch_qty;
-        refresh_display();
-    }
-}
-
-function add_farming() {
-    var ch_qty = available_from_qty(humans.idling, qty);
-    if (ch_qty > 0) {
-        humans.idling -= ch_qty;
-        humans.farming += ch_qty;
-        refresh_display();
-    }
-}
-
-function sub_farming() {
-    var ch_qty = available_from_qty(humans.farming, qty);
-    if (ch_qty > 0) {
-        humans.farming -= ch_qty;
-        humans.idling += ch_qty;
-        refresh_display();
-    }
 }
 
 function setQty(x) {
