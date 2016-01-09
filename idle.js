@@ -39,14 +39,30 @@ var humans = {
             }
         }
         refresh_display();
+    },
+    reproduce: function() {
+        var delta = Math.floor(humans.sexing/2);
+        this.idling += delta;
+        return delta;
+    },
+    starve: function() {
+        if (this.idling > 0) {
+            this.idling--;
+        } else if (this.sexing > 0) {
+            this.sexing--;
+        } else if (this.farming > 0) {
+            this.farming--;
+        } else {
+            // lose game
+        }
     }
 };
 
-var food = 0;
+var food = 100;
 var food_prod = '';
 var food_cons = '';
 var food_diff = '';
-var human_diff = '';
+var new_humans = '';
 var qty = 1;
 
 $(function() {
@@ -69,24 +85,15 @@ function loop() {
     food_prod = 2*humans.farming; // production
     food_cons = humans.count(); // consumption
     food_diff = food_prod - food_cons; // difference
-    humans.food += food_diff; // new total
+    food += food_diff; // new total
     
     // starvation
-    if (humans.food <= 0) {
-        humans.food = 0;
-        if (humans.idling > 0) {
-            humans.idling--;
-        } else if (humans.sexing > 0) {
-            humans.sexing--;
-        } else if (humans.farming > 0) {
-            humans.farming--;
-        } else {
-            // lose game
-        }
+    if (food <= 0) {
+        food = 0;
+        humans.starve();
     } else {
         // reproduction if not dying
-        human_diff = Math.floor(humans.sexing/2);
-        humans.idling += human_diff;
+        new_humans = humans.reproduce();
     }
     
     refresh_display();
@@ -95,7 +102,7 @@ function loop() {
 function refresh_display() {
     $(".humans").html(humans.count());
     $(".food_diff").html(food_diff+'/sec');
-    $(".human_diff").html(human_diff+'/sec');
+    $(".human_diff").html(new_humans+'/sec');
     $(".food_prod").html(food_prod+'/sec');
     
     $(".idling").html(humans.idling);
@@ -115,7 +122,7 @@ function refresh_display() {
         $(".food_diff_down").show();
     }
     
-    if (human_diff > 0) {
+    if (new_humans > 0) {
         $(".human_diff_container").css({'color':'green'});
         $(".human_diff_down").hide();
         $(".human_diff_up").show();
