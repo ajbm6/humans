@@ -6,6 +6,7 @@ var food_prod = '';
 var food_cons = '';
 var food_diff = '';
 var human_diff = '';
+var qty = 1;
 
 $(function() {
     refresh_display();
@@ -15,6 +16,10 @@ $(function() {
     $("button.dec_sexing").click(function() {sub_sexing()});
     $("button.inc_farming").click(function() {add_farming()});
     $("button.dec_farming").click(function() {sub_farming()});
+
+    $("button.change-qty-1").click(function() {setQty(1); });
+    $("button.change-qty-10").click(function() {setQty(10); });
+    $("button.change-qty-100").click(function() {setQty(100); });
 });
 
 function loop() {
@@ -57,6 +62,8 @@ function refresh_display() {
     $(".farming").html(farming);
     $(".food").html(food);
     
+    $(".qty").html(qty);
+    
     if (food_diff > 0) {
         $(".food_diff_container").css({'color':'green'});
         $(".food_diff_down").hide();
@@ -88,38 +95,51 @@ function refresh_display() {
     }
 }
 
+function available_from_qty(f, q) {
+    return f >= q ? q : f;
+}
+
 function add_sexing() {
-    if (idling >= 1 ) {
-        idling--;
-        sexing++;
+    var ch_qty = available_from_qty(idling, qty);
+    if (ch_qty > 0) {
+        idling -= ch_qty;
+        sexing += ch_qty;
+        refresh_display();
     }
-    refresh_display();
 }
 
 function sub_sexing() {
-    if (sexing >= 1 ) {
-        sexing--;
-        idling++;
+    var ch_qty = available_from_qty(sexing, qty);
+    if (ch_qty > 0) {
+        sexing -= ch_qty;
+        idling += ch_qty;
+        refresh_display();
     }
-    refresh_display();
 }
 
 function add_farming() {
-    if (idling >= 1 ) {
-        idling--;
-        farming++;
+    var ch_qty = available_from_qty(idling, qty);
+    if (ch_qty > 0) {
+        idling -= ch_qty;
+        farming += ch_qty;
+        refresh_display();
     }
-    refresh_display();
 }
 
 function sub_farming() {
-    if (farming >= 1 ) {
-        farming--;
-        idling++;
+    var ch_qty = available_from_qty(farming, qty);
+    if (ch_qty > 0) {
+        farming -= ch_qty;
+        idling += ch_qty;
+        refresh_display();
     }
-    refresh_display();
 }
 
 function humans() {
     return idling + sexing + farming;
+}
+
+function setQty(x) {
+    qty = x;
+    refresh_display();
 }
