@@ -1,5 +1,14 @@
+body {
+    font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+}
+
 #inventory {
     padding: 5px 10px;
     border: 1px solid black;
     border-radius: 4px;
+}
+
+.discreet {
+    font-size: 70%;
+    opacity: 0.95;
 }

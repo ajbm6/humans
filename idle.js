@@ -1,7 +1,8 @@
 var humans = {
     idling: 0,
     sexing: 2,
-    farming:4,
+    farming: 4,
+    delta: 0,
     count: function() {
         return this.idling + this.sexing + this.farming;
     },
@@ -40,20 +41,26 @@ var humans = {
         }
         refresh_display();
     },
-    reproduce: function() {
-        var delta = Math.floor(humans.sexing/2);
-        this.idling += delta;
-        return delta;
-    },
-    starve: function() {
-        if (this.idling > 0) {
-            this.idling--;
-        } else if (this.sexing > 0) {
-            this.sexing--;
-        } else if (this.farming > 0) {
-            this.farming--;
+    reproduce_and_starve: function() {
+        // starvation
+        if (food <= 0) {
+            food = 0;
+            if (this.idling > 0) {
+                this.idling--;
+            } else if (this.sexing > 0) {
+                this.sexing--;
+            } else if (this.farming > 0) {
+                this.farming--;
+            } else {
+                // lose game
+            }
+            this.delta = -1;
+            new_humans = 0;
         } else {
-            // lose game
+            // reproduction if not dying
+            new_humans = Math.floor(humans.sexing/2);
+            this.idling += new_humans;
+            this.delta = new_humans;
         }
     }
 };
@@ -77,6 +84,7 @@ $(function() {
     $("button.change-qty-1").click(function() {setQty(1); });
     $("button.change-qty-10").click(function() {setQty(10); });
     $("button.change-qty-100").click(function() {setQty(100); });
+    $("button.change-qty-1000").click(function() {setQty(1000); });
 });
 
 function loop() {
@@ -87,23 +95,17 @@ function loop() {
     food_diff = food_prod - food_cons; // difference
     food += food_diff; // new total
     
-    // starvation
-    if (food <= 0) {
-        food = 0;
-        humans.starve();
-    } else {
-        // reproduction if not dying
-        new_humans = humans.reproduce();
-    }
+    humans.reproduce_and_starve();
     
     refresh_display();
 }
 
 function refresh_display() {
     $(".humans").html(humans.count());
-    $(".food_diff").html(food_diff+'/sec');
-    $(".human_diff").html(new_humans+'/sec');
-    $(".food_prod").html(food_prod+'/sec');
+    $(".human_diff").html(Math.abs(humans.delta));
+    $(".food_diff").html(Math.abs(food_diff));
+    $(".new_humans").html(new_humans+' humans/sec');
+    $(".food_prod").html(food_prod+' food/sec');
     
     $(".idling").html(humans.idling);
     $(".sexing").html(humans.sexing);
@@ -111,6 +113,17 @@ function refresh_display() {
     $(".food").html(food);
     
     $(".qty").html(qty);
+    
+    if (humans.delta > 0) {
+        $(".human_diff_container").css({'color':'green'});
+        $(".human_diff_down").hide();
+        $(".human_diff_up").show();
+    } else {
+        $(".human_diff_container").css({'color':'red'});
+        $(".human_diff_up").hide();
+        $(".human_diff_down").show();
+    }
+    $(".human_diff_container").show().delay(400).fadeOut();
     
     if (food_diff > 0) {
         $(".food_diff_container").css({'color':'green'});
@@ -121,15 +134,16 @@ function refresh_display() {
         $(".food_diff_up").hide();
         $(".food_diff_down").show();
     }
+    $(".food_diff_container").show().delay(400).fadeOut();
     
     if (new_humans > 0) {
-        $(".human_diff_container").css({'color':'green'});
-        $(".human_diff_down").hide();
-        $(".human_diff_up").show();
+        $(".new_humans_container").css({'color':'green'});
+        $(".new_humans_down").hide();
+        $(".new_humans_up").show();
     } else {
-        $(".human_diff_container").css({'color':'red'});
-        $(".human_diff_up").hide();
-        $(".human_diff_down").show();
+        $(".new_humans_container").css({'color':'red'});
+        $(".new_humans_up").hide();
+        $(".new_humans_down").show();
     }
     
     if (food_prod > 0) {

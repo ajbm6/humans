@@ -11,49 +11,76 @@
 </head>
 
 <body>
+    <h1>Humans</h1>
+    <p class="discreet">Humans reproduce and consume food.  Humans need food or they die.</p>
+    
     <div id="inventory">
-        <i class="fa fa-users"></i> <span class="humans"></span> (<i class="fa fa-bed"></i> <span class="idling"></span>)
-        <span style="margin:10px;"></span>
-        <i class="fa fa-apple"></i> <span class="food"></span>
-        <span class="food_diff_container">
-            <span class="food_diff_up" style="display:none"><i class="fa fa-arrow-up"></i></span>
-            <span class="food_diff_down" style="display:none"><i class="fa fa-arrow-down"></i></span>
-            <span class="food_diff"></span>
-        </span>
+        <div>
+            <i class="fa fa-users fa-fw"></i> <span class="humans"></span> humans
+            <span class="human_diff_container discreet">
+                <span class="human_diff_up" style="display:none">+</span>
+                <span class="human_diff_down" style="display:none">-</span>
+                <span class="human_diff"></span>
+                <span class="human_diff_up" style="display:none">babies</span>
+                <span class="human_diff_down" style="display:none">dying</span>
+            </span>
+        </div>
+        <div>
+            <i class="fa fa-apple fa-fw"></i> <span class="food"></span> food
+            <span class="food_diff_container discreet">
+                <span class="food_diff_up" style="display:none">+</span>
+                <span class="food_diff_down" style="display:none">-</span>
+                <span class="food_diff"></span>
+                <span class="food_diff_down" style="display:none">starving</span>
+            </span>
+        </div>
     </div>
+    
+    <br>
+    <div>
+        <i class="fa fa-bed" style="margin-left: 60px"></i> <span class="idling"></span> idling
+        <span class="discreet"><i class="fa fa-long-arrow-left"></i> Idle humans not helping.  Make sexing or farming.</span>
+    </div>
+    
     <br>
     <div>
         <button class="inc_sexing"><i class="fa fa-plus"></i></button>
         <button class="dec_sexing"><i class="fa fa-minus"></i></button>
-        <i class="fa fa-users"></i> <span class="sexing"></span>
+        <i class="fa fa-users"></i> <span class="sexing"></span> sexing
         <i class="fa fa-long-arrow-right"></i>
         <i class="fa fa-users fa-fw"></i>
-        <span class="human_diff_container">
-            <span class="human_diff_up" style="display:none"><i class="fa fa-arrow-up"></i></span>
-            <span class="human_diff_down" style="display:none"><i class="fa fa-arrow-down"></i></span>
-            <span class="human_diff"></span>
+        <span class="new_humans_container discreet">
+            <span class="new_humans_up" style="display:none">+</span>
+            <span class="new_humans_down" style="display:none">-</span>
+            <span class="new_humans"></span>
+            <span class="new_humans_down" style="display:none">(starving)</span>
         </span>
     </div>
+    
     <br>
     <div>
         <button class="inc_farming"><i class="fa fa-plus"></i></button>
         <button class="dec_farming"><i class="fa fa-minus"></i></button>
-        <i class="fa fa-users"></i> <span class="farming"></span>
+        <i class="fa fa-users"></i> <span class="farming"></span> farming
         <i class="fa fa-long-arrow-right"></i>
         <i class="fa fa-apple fa-fw"></i>
-        <span class="food_prod_container">
-            <span class="food_prod_up" style="display:none"><i class="fa fa-arrow-up"></i></span>
-            <span class="food_prod_down" style="display:none"><i class="fa fa-arrow-down"></i></span>
+        <span class="food_prod_container discreet">
+            <span class="food_prod_up" style="display:none">+</span>
+            <span class="food_prod_down" style="display:none">-</span>
             <span class="food_prod"></span>
         </span>
     </div>
+    
     <br>
-    <div>
+    <div class="discreet">
+        x<span class="qty"></span> multipier<br>
         <button class="change-qty-1">1</button>
         <button class="change-qty-10">10</button>
         <button class="change-qty-100">100</button>
-        Multiplier: <span class="qty"></span>
+        <button class="change-qty-1000">1000</button>
     </div>
+    
+    <p class="discreet">gl hf dd</p>
 </body>
 
 </html>
