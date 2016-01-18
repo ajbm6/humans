@@ -1,11 +1,13 @@
-body {
-    font-family: Futura,"Trebuchet MS",Arial,sans-serif;
-}
-
-#inventory {
-    padding: 5px 10px;
+.resource-panel {
+    width: 100px;
+    padding: 2px;
+    display: inline-block;
     border: 1px solid black;
     border-radius: 4px;
+}
+.tiny {
+    font-size: 70%;
+    margin: 0;
 }
 
 .discreet {

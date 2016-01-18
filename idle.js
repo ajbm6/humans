@@ -1,10 +1,11 @@
 var humans = {
     idling: 0,
     sexing: 2,
-    farming: 4,
+    farming: 7,
+    lumbering: 1,
     delta: 0,
     count: function() {
-        return this.idling + this.sexing + this.farming;
+        return this.idling + this.sexing + this.farming + this.lumbering;
     },
     assign: function(job, qty) {
         if (qty > 0) {
@@ -18,6 +19,10 @@ var humans = {
                     case "farming":
                         this.idling -= ch_qty;
                         this.farming += ch_qty;
+                        break;
+                    case "lumbering":
+                        this.idling -= ch_qty;
+                        this.lumbering += ch_qty;
                         break;
                     default:
                         break;
@@ -35,6 +40,11 @@ var humans = {
                     this.farming -= ch_qty;
                     this.idling += ch_qty;
                     break;
+                case "lumbering":
+                    var ch_qty = available_from_qty(this.lumbering, -qty);
+                    this.lumbering -= ch_qty;
+                    this.idling += ch_qty;
+                    break;
                 default:
                     break;
             }
@@ -49,6 +59,8 @@ var humans = {
                 this.idling--;
             } else if (this.sexing > 0) {
                 this.sexing--;
+            } else if (this.lumbering > 0) {
+                this.lumbering--;
             } else if (this.farming > 0) {
                 this.farming--;
             } else {
@@ -59,13 +71,19 @@ var humans = {
         } else {
             // reproduction if not dying
             new_humans = Math.floor(humans.sexing/2);
+            if ((this.count() + new_humans) > homes*4) {
+                new_humans = homes*4 - this.count();
+            }
             this.idling += new_humans;
             this.delta = new_humans;
         }
     }
 };
 
-var food = 100;
+var food = 20;
+var wood = 0;
+var homes = 4;
+
 var food_prod = '';
 var food_cons = '';
 var food_diff = '';
@@ -75,45 +93,58 @@ var qty = 1;
 $(function() {
     refresh_display();
     setInterval(loop, 1000);
-    
+
     $("button.inc_sexing").click(function() { humans.assign("sexing",qty) });
     $("button.dec_sexing").click(function() { humans.assign("sexing",-qty) });
     $("button.inc_farming").click(function() { humans.assign("farming",qty) });
     $("button.dec_farming").click(function() { humans.assign("farming",-qty) });
+    $("button.inc_lumbering").click(function() { humans.assign("lumbering",qty) });
+    $("button.dec_lumbering").click(function() { humans.assign("lumbering",-qty) });
+
+    $("button.inc_homes").click(function() { build_homes(qty) });
 
     $("button.change-qty-1").click(function() {setQty(1); });
     $("button.change-qty-10").click(function() {setQty(10); });
     $("button.change-qty-100").click(function() {setQty(100); });
     $("button.change-qty-1000").click(function() {setQty(1000); });
+    $("button.change-qty-1000000").click(function() {setQty(1000000); });
 });
 
 function loop() {
-    
+
     // food
     food_prod = 2*humans.farming; // production
     food_cons = humans.count(); // consumption
     food_diff = food_prod - food_cons; // difference
     food += food_diff; // new total
-    
+
+    // wood
+    wood += humans.lumbering;
+
     humans.reproduce_and_starve();
-    
+
     refresh_display();
 }
 
 function refresh_display() {
-    $(".humans").html(humans.count());
+    $(".humans").html(metrify(humans.count()));
+    $(".food").html(metrify(food));
+    $(".wood").html(metrify(wood));
+    $(".homes").html(metrify(homes));
+
     $(".human_diff").html(Math.abs(humans.delta));
     $(".food_diff").html(Math.abs(food_diff));
     $(".new_humans").html(new_humans+' humans/sec');
     $(".food_prod").html(food_prod+' food/sec');
-    
+
     $(".idling").html(humans.idling);
     $(".sexing").html(humans.sexing);
     $(".farming").html(humans.farming);
-    $(".food").html(food);
-    
+    $(".lumbering").html(humans.lumbering);
+
+
     $(".qty").html(qty);
-    
+
     if (humans.delta > 0) {
         $(".human_diff_container").css({'color':'green'});
         $(".human_diff_down").hide();
@@ -124,7 +155,7 @@ function refresh_display() {
         $(".human_diff_down").show();
     }
     $(".human_diff_container").show().delay(400).fadeOut();
-    
+
     if (food_diff > 0) {
         $(".food_diff_container").css({'color':'green'});
         $(".food_diff_down").hide();
@@ -135,7 +166,7 @@ function refresh_display() {
         $(".food_diff_down").show();
     }
     $(".food_diff_container").show().delay(400).fadeOut();
-    
+
     if (new_humans > 0) {
         $(".new_humans_container").css({'color':'green'});
         $(".new_humans_down").hide();
@@ -145,7 +176,7 @@ function refresh_display() {
         $(".new_humans_up").hide();
         $(".new_humans_down").show();
     }
-    
+
     if (food_prod > 0) {
         $(".food_prod_container").css({'color':'green'});
         $(".food_prod_down").hide();
@@ -164,4 +195,24 @@ function available_from_qty(f, q) {
 function setQty(x) {
     qty = x;
     refresh_display();
+}
+
+// convert value to abbreviated metric strings for display
+function metrify(x) {
+    if (x < 1000) {
+        return x;
+    } else if (x < 1000000) {
+        return Math.round(x/1000 *100)/100 + 'k';
+    } else if (x < 1000000000) {
+        return Math.round(x/1000000 *100)/100 + 'm';
+    } else {
+        return Math.round(x/1000000000 *100)/100 + 'b';
+    }
+}
+
+function build_homes(qty) {
+    if (wood/20 > qty) {
+        wood -= qty*20;
+        homes += qty;
+    }
 }
