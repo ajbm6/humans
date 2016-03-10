@@ -83,7 +83,7 @@ var humans = {
 var food = 0;
 var wood = 0;
 var homes = 1;
-var wood_cost_per_home = 100;
+var wood_cost_per_home = 40;
 
 var food_prod = '';
 var food_cons = '';
