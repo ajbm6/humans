@@ -1,8 +1,8 @@
 var humans = {
-    idling: 0,
-    sexing: 2,
-    farming: 7,
-    lumbering: 1,
+    idling: 1,
+    sexing: 0,
+    farming: 2,
+    lumbering: 0,
     delta: 0,
     count: function() {
         return this.idling + this.sexing + this.farming + this.lumbering;
@@ -80,9 +80,10 @@ var humans = {
     }
 };
 
-var food = 20;
+var food = 0;
 var wood = 0;
-var homes = 4;
+var homes = 1;
+var wood_cost_per_home = 100;
 
 var food_prod = '';
 var food_cons = '';
@@ -141,6 +142,8 @@ function refresh_display() {
     $(".sexing").html(humans.sexing);
     $(".farming").html(humans.farming);
     $(".lumbering").html(humans.lumbering);
+
+    $(".wood_cost_per_home").html(wood_cost_per_home);
 
 
     $(".qty").html(qty);
@@ -211,8 +214,8 @@ function metrify(x) {
 }
 
 function build_homes(qty) {
-    if (wood/20 > qty) {
-        wood -= qty*20;
+    if (wood/wood_cost_per_home >= qty) {
+        wood -= qty*wood_cost_per_home;
         homes += qty;
     }
 }
