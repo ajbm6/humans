@@ -124,6 +124,25 @@ function loop() {
 
     humans.reproduce_and_starve();
 
+    if (humans.delta < 0) {
+        noty({
+            text: humans.delta + " humans",
+            layout: 'bottomRight',
+            type: 'error',
+            timeout: 1000
+
+        });
+    } else if (humans.delta > 0) {
+        noty({
+            text: "+" + humans.delta + " humans",
+            layout: 'bottomRight',
+            type: 'success',
+            timeout: 1000
+
+        });
+    }
+
+
     refresh_display();
 }
 
