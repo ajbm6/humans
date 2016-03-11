@@ -157,10 +157,10 @@ function refresh_display() {
     $(".new_humans").html(new_humans+' humans/sec');
     $(".food_prod").html(food_prod+' food/sec');
 
-    $(".idling").html(humans.idling);
-    $(".sexing").html(humans.sexing);
-    $(".farming").html(humans.farming);
-    $(".lumbering").html(humans.lumbering);
+    $(".idling").html(metrify(humans.idling));
+    $(".sexing").html(metrify(humans.sexing));
+    $(".farming").html(metrify(humans.farming));
+    $(".lumbering").html(metrify(humans.lumbering));
 
     $(".wood_cost_per_home").html(wood_cost_per_home);
 
@@ -227,8 +227,10 @@ function metrify(x) {
         return Math.round(x/1000 *100)/100 + 'k';
     } else if (x < 1000000000) {
         return Math.round(x/1000000 *100)/100 + 'm';
-    } else {
+    } else if (x < 1000000000000) {
         return Math.round(x/1000000000 *100)/100 + 'b';
+    } else {
+        return Math.round(x/1000000000000 *100)/100 + 't';
     }
 }
 
