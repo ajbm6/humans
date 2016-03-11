@@ -3,9 +3,10 @@ var humans = {
     sexing: 0,
     farming: 2,
     lumbering: 0,
+    mining_bitcoin: 0,
     delta: 0,
     count: function() {
-        return this.idling + this.sexing + this.farming + this.lumbering;
+        return this.idling + this.sexing + this.farming + this.lumbering + this.mining_bitcoin;
     },
     assign: function(job, qty) {
         if (qty > 0) {
@@ -23,6 +24,10 @@ var humans = {
                     case "lumbering":
                         this.idling -= ch_qty;
                         this.lumbering += ch_qty;
+                        break;
+                    case "mining_bitcoin":
+                        this.idling -= ch_qty;
+                        this.mining_bitcoin += ch_qty;
                         break;
                     default:
                         break;
@@ -45,6 +50,11 @@ var humans = {
                     this.lumbering -= ch_qty;
                     this.idling += ch_qty;
                     break;
+                case "mining_bitcoin":
+                    var ch_qty = available_from_qty(this.mining_bitcoin, -qty);
+                    this.mining_bitcoin -= ch_qty;
+                    this.idling += ch_qty;
+                    break;
                 default:
                     break;
             }
@@ -59,6 +69,8 @@ var humans = {
                 this.idling--;
             } else if (this.sexing > 0) {
                 this.sexing--;
+            } else if (this.mining_bitcoin > 0) {
+                this.mining_bitcoin--;
             } else if (this.lumbering > 0) {
                 this.lumbering--;
             } else if (this.farming > 0) {
@@ -103,6 +115,8 @@ $(function() {
     $("button.dec_farming").click(function() { humans.assign("farming",-qty) });
     $("button.inc_lumbering").click(function() { humans.assign("lumbering",qty) });
     $("button.dec_lumbering").click(function() { humans.assign("lumbering",-qty) });
+    $("button.inc_mining_bitcoin").click(function() { humans.assign("mining_bitcoin",qty) });
+    $("button.dec_mining_bitcoin").click(function() { humans.assign("mining_bitcoin",-qty) });
 
     $("button.inc_homes").click(function() { build_homes(qty) });
 
@@ -123,6 +137,9 @@ function loop() {
 
     // wood
     wood += humans.lumbering;
+
+    // bitcoin
+    bitcoin += humans.mining_bitcoin; //@todo should be random per miner
 
     humans.reproduce_and_starve();
 
@@ -166,9 +183,9 @@ function refresh_display() {
     $(".sexing").html(metrify(humans.sexing));
     $(".farming").html(metrify(humans.farming));
     $(".lumbering").html(metrify(humans.lumbering));
+    $(".mining_bitcoin").html(metrify(humans.mining_bitcoin));
 
     $(".wood_cost_per_home").html(wood_cost_per_home);
-
 
     $(".qty").html(qty);
 
