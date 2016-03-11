@@ -82,7 +82,7 @@ var humans = {
 
 var food = 0;
 var wood = 0;
-var money = 0;
+var bitcoin = 0;
 var homes = 1;
 
 var wood_cost_per_home = 40;
@@ -152,7 +152,7 @@ function refresh_display() {
     $(".humans").html(metrify(humans.count()));
     $(".food").html(metrify(food));
     $(".wood").html(metrify(wood));
-    $(".money").html(metrify(money));
+    $(".bitcoin").html(metrify(bitcoin));
     $(".homes").html(metrify(homes));
 
     $(".homes-cap").html(metrify(homes*4));
