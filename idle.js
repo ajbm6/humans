@@ -152,6 +152,8 @@ function refresh_display() {
     $(".wood").html(metrify(wood));
     $(".homes").html(metrify(homes));
 
+    $(".homes-cap").html(metrify(homes*4));
+
     $(".human_diff").html(Math.abs(humans.delta));
     $(".food_diff").html(Math.abs(food_diff));
     $(".new_humans").html(new_humans+' humans/sec');
