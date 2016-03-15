@@ -106,6 +106,8 @@ var food_diff = '';
 var new_humans = '';
 var qty = 1;
 
+var achieved_1000_bitcoin = false;
+
 $(function() {
     refresh_display();
     setInterval(loop, 1000);
@@ -165,6 +167,11 @@ function loop() {
 
 
     refresh_display();
+
+    if (!achieved_1000_bitcoin && bitcoin >= 1000) {
+        achieved_1000_bitcoin = true;
+        save_score(ticks);
+    }
 }
 
 function refresh_display() {
@@ -264,4 +271,19 @@ function build_homes(qty) {
         wood -= qty*wood_cost_per_home;
         homes += qty;
     }
+}
+
+/**
+ * API
+ */
+var api_url = "http://localhost/humans/api.php"
+
+function save_score(ticks) {
+    $.ajax({
+        url: api_url,
+        method: "POST", //@todo why is this being received as a GET!?
+        data: {
+            "ticks" : ticks
+        }
+    })
 }
