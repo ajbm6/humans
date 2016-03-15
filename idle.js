@@ -95,6 +95,7 @@ var humans = {
 var food = 0;
 var wood = 0;
 var bitcoin = 0;
+var ticks = 0;
 var homes = 1;
 
 var wood_cost_per_home = 40;
@@ -128,6 +129,7 @@ $(function() {
 });
 
 function loop() {
+    ticks++;
 
     // food
     food_prod = 2*humans.farming; // production
@@ -170,6 +172,7 @@ function refresh_display() {
     $(".food").html(metrify(food));
     $(".wood").html(metrify(wood));
     $(".bitcoin").html(metrify(bitcoin));
+    $(".ticks").html(ticks);
     $(".homes").html(metrify(homes));
 
     $(".homes-cap").html(metrify(homes*4));
