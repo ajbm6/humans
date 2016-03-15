@@ -10,10 +10,11 @@ class Api
         $this->db = $db;
     }
 
-    public function saveScore($ticks) {
+    public function saveScore($username, $ticks) {
         $db = $this->db;
-        $query = 'INSERT INTO ticks_to_1000_bitcoin (ticks) VALUES (:ticks)';
+        $query = 'INSERT INTO ticks_to_1000_bitcoin (username, ticks) VALUES (:username, :ticks)';
         $db->query($query);
+        $db->bind(':username', $username);
         $db->bind(':ticks', $ticks);
         $result = $db->execute();
         return $result;

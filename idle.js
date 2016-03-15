@@ -170,7 +170,8 @@ function loop() {
 
     if (!achieved_1000_bitcoin && bitcoin >= 1000) {
         achieved_1000_bitcoin = true;
-        save_score(ticks);
+        var username = prompt("You got 1000 bitcoin!  What's your name?");
+        save_score(username, ticks);
     }
 }
 
@@ -278,12 +279,13 @@ function build_homes(qty) {
  */
 var api_url = "http://localhost/humans/api.php"
 
-function save_score(ticks) {
+function save_score(username, ticks) {
     $.ajax({
         url: api_url,
         method: "POST", //@todo why is this being received as a GET!?
         data: {
-            "ticks" : ticks
+            "username": username,
+            "ticks": ticks
         }
     })
 }
