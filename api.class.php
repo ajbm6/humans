@@ -19,4 +19,12 @@ class Api
         $result = $db->execute();
         return $result;
     }
+
+    public function getScores() {
+        $db = $this->db;
+        $query = 'SELECT username, ticks FROM ticks_to_1000_bitcoin ORDER BY ticks DESC';
+        $db->query($query);
+        $results = $db->resultset();
+        return $results;
+    }
 }

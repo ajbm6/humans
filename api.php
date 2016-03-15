@@ -11,3 +11,7 @@ if (isset($_GET['ticks'])) {
     $ticks = isset($_GET['ticks']);
     $api->saveScore($username, $ticks);
 }
+
+if (isset($_GET['action']) && $_GET['action'] == 'get_scores') {
+    echo json_encode($api->getScores());
+}

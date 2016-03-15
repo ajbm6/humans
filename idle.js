@@ -110,6 +110,8 @@ var achieved_1000_bitcoin = false;
 
 $(function() {
     refresh_display();
+    get_scores();
+
     setInterval(loop, 1000);
 
     $("button.inc_sexing").click(function() { humans.assign("sexing",qty) });
@@ -288,4 +290,15 @@ function save_score(username, ticks) {
             "ticks": ticks
         }
     })
+}
+
+function get_scores() {
+    $.ajax({
+        method: "GET",
+        url: api_url,
+        data: { "action": "get_scores" },
+        success: function(data) {
+            $("#highscores").html(data);
+        }
+    });
 }
