@@ -298,7 +298,11 @@ function get_scores() {
         url: api_url,
         data: { "action": "get_scores" },
         success: function(data) {
-            $("#highscores").html(data);
+            data = JSON.parse(data);
+            console.log(typeof(data));
+            data.forEach(function(d) {
+                $("#highscores tbody").append("<tr><td>"+d.username+"</td><td>"+d.ticks+"</td></tr>");
+            });
         }
     });
 }
