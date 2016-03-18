@@ -282,7 +282,7 @@ function build_homes(qty) {
 function save_score(username, ticks) {
     $.ajax({
         url: api_url,
-        method: "POST", //@todo why is this being received as a GET!?
+        method: "POST",
         data: {
             "username": username,
             "ticks": ticks
