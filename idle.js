@@ -279,8 +279,6 @@ function build_homes(qty) {
 /**
  * API
  */
-var api_url = "http://localhost/humans/api.php"
-
 function save_score(username, ticks) {
     $.ajax({
         url: api_url,
