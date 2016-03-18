@@ -22,7 +22,7 @@ class Api
 
     public function getScores() {
         $db = $this->db;
-        $query = 'SELECT username, ticks FROM ticks_to_1000_bitcoin ORDER BY ticks DESC';
+        $query = 'SELECT username, ticks FROM ticks_to_1000_bitcoin ORDER BY ticks ASC';
         $db->query($query);
         $results = $db->resultset();
         return $results;
