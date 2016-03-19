@@ -22,7 +22,9 @@
                 </div>
                 <span class="resource-qty humans"></span>
                 /<span class="homes-cap discreet"></span>
-                <br>
+                <div class="production_container discreet">
+                    &nbsp;
+                </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_sexing"><i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-success inc_sexing"><i class="fa fa-plus"></i></button>
@@ -35,10 +37,10 @@
                     <i class="fa fa-apple fa-fw"></i>
                 </div>
                 <span class="resource-qty food"></span>
-                <div class="food production_container discreet">
-                    <span class="food_prod_up" style="display:none">+</span>
-                    <span class="food_prod_down" style="display:none">-</span>
-                    <span class="food_prod"></span>
+                <div class="food change_container discreet">
+                    <span class="food_change_up" style="display:none">+</span>
+                    <span class="food_change_down" style="display:none">-</span>
+                    <span class="food_change"></span>
                 </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_farming"><i class="fa fa-minus"></i></button>
@@ -52,7 +54,9 @@
                     <i class="fa fa-tree fa-fw" ></i><br>
                 </div>
                 <span class="resource-qty wood"></span>
-                <br>
+                <div class="production_container discreet">
+                    &nbsp;
+                </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_lumbering"><i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-success inc_lumbering"><i class="fa fa-plus"></i></button>
@@ -65,7 +69,9 @@
                     <i class="fa fa-home"></i>
                 </div>
                 <span class="resource-qty homes"></span>
-                <br>
+                <div class="production_container discreet">
+                    &nbsp;
+                </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-success inc_homes"><i class="fa fa-plus"></i></button>
                 </div>
@@ -76,7 +82,9 @@
                     <i class="fa fa-bitcoin fa-fw" ></i><br>
                 </div>
                 <span class="resource-qty bitcoin"></span>
-                <br>
+                <div class="production_container discreet">
+                    &nbsp;
+                </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_mining_bitcoin"><i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-success inc_mining_bitcoin"><i class="fa fa-plus"></i></button>
@@ -159,12 +167,6 @@
                             Farming
                             <i class="fa fa-long-arrow-right"></i>
                             <i class="fa fa-apple fa-fw"></i>
-
-                            <span class="food_prod_container discreet">
-                                <span class="food_prod_up" style="display:none">+</span>
-                                <span class="food_prod_down" style="display:none">-</span>
-                                <span class="food_prod"></span>
-                            </span>
                         </span>
                     </td>
                 </tr>

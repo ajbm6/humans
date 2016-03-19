@@ -102,7 +102,7 @@ var wood_cost_per_home = 40;
 
 var food_prod = '';
 var food_cons = '';
-var food_diff = '';
+var food_change = '';
 var new_humans = '';
 var qty = 1;
 
@@ -138,8 +138,8 @@ function loop() {
     // food
     food_prod = 2*humans.farming; // production
     food_cons = humans.count(); // consumption
-    food_diff = food_prod - food_cons; // difference
-    food += food_diff; // new total
+    food_change = food_prod - food_cons; // difference
+    food += food_change; // new total
 
     // wood
     wood += humans.lumbering;
@@ -188,9 +188,8 @@ function refresh_display() {
     $(".homes-cap").html(metrify(homes*4));
 
     $(".human_diff").html(Math.abs(humans.delta));
-    $(".food_diff").html(Math.abs(food_diff));
+    $(".food_change").html(Math.abs(food_change));
     $(".new_humans").html(new_humans+' humans/sec');
-    $(".food_prod").html(food_prod);
 
     $(".idling").html(metrify(humans.idling));
     $(".sexing").html(metrify(humans.sexing));
@@ -213,17 +212,6 @@ function refresh_display() {
     }
     $(".human_diff_container").show().delay(400).fadeOut();
 
-    if (food_diff > 0) {
-        $(".food_diff_container").css({'color':'green'});
-        $(".food_diff_down").hide();
-        $(".food_diff_up").show();
-    } else {
-        $(".food_diff_container").css({'color':'red'});
-        $(".food_diff_up").hide();
-        $(".food_diff_down").show();
-    }
-    $(".food_diff_container").show().delay(400).fadeOut();
-
     if (new_humans > 0) {
         $(".new_humans_container").css({'color':'green'});
         $(".new_humans_down").hide();
@@ -234,14 +222,18 @@ function refresh_display() {
         $(".new_humans_down").show();
     }
 
-    if (food_prod > 0) {
-        $(".food.production_container").css({'color':'green'});
-        $(".food_prod_down").hide();
-        $(".food_prod_up").show();
+    if (food_change > 0) {
+        $(".food.change_container").css({'color':'green'});
+        $(".food_change_down").hide();
+        $(".food_change_up").show();
+    } else if (food_change == 0) {
+        $(".food.change_container").css({'color':'black'});
+        $(".food_change_down").hide();
+        $(".food_change_up").hide();
     } else {
         $(".food.production_container").css({'color':'red'});
-        $(".food_prod_up").hide();
-        $(".food_prod_down").show();
+        $(".food_change_up").hide();
+        $(".food_change_down").show();
     }
 }
 
