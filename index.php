@@ -26,12 +26,15 @@
             <!-- Humans -->
             <div class="resource-panel" title="humans">
                 <div class="icon">
-                    <i class="fa fa-users fa-fw"></i>
+                    <i class="fa fa-user fa-fw"></i>
                 </div>
                 <span class="resource-qty humans"></span>
                 /<span class="homes-cap discreet"></span>
-                <div class="production_container discreet">
-                    &nbsp;
+                <div class="humans change_container discreet">
+                    <span class="humans_change_up" style="display:none">+</span>
+                    <span class="humans_change_down" style="display:none">-</span>
+                    <span class="humans_change"></span>
+                    <i class="fa fa-user fa-fw"></i>
                 </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_sexing"><i class="fa fa-minus"></i></button>
@@ -161,13 +164,6 @@
                             Sexing
                             <i class="fa fa-long-arrow-right"></i>
                             <i class="fa fa-users fa-fw"></i>
-
-                            <span class="new_humans_container discreet">
-                                <span class="new_humans_up" style="display:none">+</span>
-                                <span class="new_humans_down" style="display:none">-</span>
-                                <span class="new_humans"></span>
-                                <span class="new_humans_down" style="display:none"></span>
-                            </span>
                         </span>
                     </td>
                 </tr>

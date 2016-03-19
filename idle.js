@@ -187,9 +187,9 @@ function refresh_display() {
 
     $(".homes-cap").html(metrify(homes*4));
 
-    $(".human_diff").html(Math.abs(humans.delta));
+    $(".humans_change").html(Math.abs(humans.delta));
     $(".food_change").html(Math.abs(food_change));
-    $(".new_humans").html(new_humans+' humans/sec');
+    $(".new_humans").html(new_humans);
 
     $(".idling").html(metrify(humans.idling));
     $(".sexing").html(metrify(humans.sexing));
@@ -202,24 +202,17 @@ function refresh_display() {
     $(".qty").html(qty);
 
     if (humans.delta > 0) {
-        $(".human_diff_container").css({'color':'green'});
-        $(".human_diff_down").hide();
-        $(".human_diff_up").show();
+        $(".humans.change_container").css({'color':'green'});
+        $(".humans_change_down").hide();
+        $(".humans_change_up").show();
+    } else if (humans.delta == 0) {
+        $(".humans.change_container").css({'color':'black'});
+        $(".humans_change_up").hide();
+        $(".humans_change_down").hide();
     } else {
-        $(".human_diff_container").css({'color':'red'});
-        $(".human_diff_up").hide();
-        $(".human_diff_down").show();
-    }
-    $(".human_diff_container").show().delay(400).fadeOut();
-
-    if (new_humans > 0) {
-        $(".new_humans_container").css({'color':'green'});
-        $(".new_humans_down").hide();
-        $(".new_humans_up").show();
-    } else {
-        $(".new_humans_container").css({'color':'red'});
-        $(".new_humans_up").hide();
-        $(".new_humans_down").show();
+        $(".humans.change_container").css({'color':'red'});
+        $(".humans_change_up").hide();
+        $(".humans_change_down").show();
     }
 
     if (food_change > 0) {
