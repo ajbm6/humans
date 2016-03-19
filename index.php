@@ -9,6 +9,13 @@
 
         <!-- Resources -->
         <div id="inventory">
+            <div class="resource-panel" title="idling">
+                <div class="icon">
+                    <i class="fa fa-bed"></i>
+                </div>
+                <span class="resource-qty idling"></span>
+            </div>
+
             <div class="resource-panel" title="humans">
                 <div class="icon">
                     <i class="fa fa-users fa-fw"></i>
@@ -28,7 +35,11 @@
                     <i class="fa fa-apple fa-fw"></i>
                 </div>
                 <span class="resource-qty food"></span>
-                <br>
+                <div class="food production_container discreet">
+                    <span class="food_prod_up" style="display:none">+</span>
+                    <span class="food_prod_down" style="display:none">-</span>
+                    <span class="food_prod"></span>
+                </div>
                 <div class="btn-group btn-group-xs">
                     <button type="button" class="btn btn-danger dec_farming"><i class="fa fa-minus"></i></button>
                     <button type="button" class="btn btn-success inc_farming"><i class="fa fa-plus"></i></button>
@@ -47,6 +58,17 @@
                     <button type="button" class="btn btn-success inc_lumbering"><i class="fa fa-plus"></i></button>
                 </div>
                 <i class="fa fa-users"></i> <span class="lumbering"></span>
+            </div>
+
+            <div class="resource-panel" title="homes">
+                <div class="icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <span class="resource-qty homes"></span>
+                <br>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-success inc_homes"><i class="fa fa-plus"></i></button>
+                </div>
             </div>
 
             <div class="resource-panel" title="bitcoin">

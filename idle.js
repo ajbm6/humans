@@ -178,19 +178,19 @@ function loop() {
 }
 
 function refresh_display() {
-    $(".humans").html(metrify(humans.count()));
-    $(".food").html(metrify(food));
-    $(".wood").html(metrify(wood));
-    $(".bitcoin").html(metrify(bitcoin));
-    $(".ticks").html(ticks);
-    $(".homes").html(metrify(homes));
+    $(".resource-qty.humans").html(metrify(humans.count()));
+    $(".resource-qty.food").html(metrify(food));
+    $(".resource-qty.wood").html(metrify(wood));
+    $(".resource-qty.bitcoin").html(metrify(bitcoin));
+    $(".resource-qty.ticks").html(ticks);
+    $(".resource-qty.homes").html(metrify(homes));
 
     $(".homes-cap").html(metrify(homes*4));
 
     $(".human_diff").html(Math.abs(humans.delta));
     $(".food_diff").html(Math.abs(food_diff));
     $(".new_humans").html(new_humans+' humans/sec');
-    $(".food_prod").html(food_prod+' food/sec');
+    $(".food_prod").html(food_prod);
 
     $(".idling").html(metrify(humans.idling));
     $(".sexing").html(metrify(humans.sexing));
@@ -235,11 +235,11 @@ function refresh_display() {
     }
 
     if (food_prod > 0) {
-        $(".food_prod_container").css({'color':'green'});
+        $(".food.production_container").css({'color':'green'});
         $(".food_prod_down").hide();
         $(".food_prod_up").show();
     } else {
-        $(".food_prod_container").css({'color':'red'});
+        $(".food.production_container").css({'color':'red'});
         $(".food_prod_up").hide();
         $(".food_prod_down").show();
     }
