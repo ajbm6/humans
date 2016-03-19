@@ -1,6 +1,7 @@
 .resource-panel {
     padding: 15px;
     display: inline-block;
+    vertical-align: top;
 }
 .resource-panel .icon {
     display: inline-block;
