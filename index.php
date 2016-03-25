@@ -121,15 +121,22 @@
                 </div>
                 <div>Ticks</div>
             </div>
+            <!-- Multiplier -->
+            <div class="resource-panel" title="multiplier">
+                <div class="icon">
+                    x<br>
+                </div>
+                <span class="resource-qty qty"></span>
+                <div class="production_container discreet">
+                    &nbsp;
+                </div>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-danger dec_multiplier"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-success inc_multiplier"><i class="fa fa-plus"></i></button>
+                </div>
+                <div>Click Multiplier</div>
+            </div>
         </div>
-        <div class="btn-group btn-group-xs">
-            <button type="button" class="btn btn-default change-qty-1">1</button>
-            <button type="button" class="btn btn-default change-qty-10">10</button>
-            <button type="button" class="btn btn-default change-qty-100">100</button>
-            <button type="button" class="btn btn-default change-qty-1000">1000</button>
-            <button type="button" class="btn btn-default change-qty-1000000">1000000</button>
-        </div>
-        x<span class="qty"></span> multiplier<br>
     </div>
 
 

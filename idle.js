@@ -125,6 +125,9 @@ $(function() {
 
     $("button.inc_homes").click(function() { build_homes(qty) });
 
+    $("button.inc_multiplier").click(function() { setQty(Math.floor(qty*10)); });
+    $("button.dec_multiplier").click(function() { setQty(Math.floor(qty/10)); });
+
     $("button.change-qty-1").click(function() {setQty(1); });
     $("button.change-qty-10").click(function() {setQty(10); });
     $("button.change-qty-100").click(function() {setQty(100); });
@@ -199,7 +202,7 @@ function refresh_display() {
 
     $(".wood_cost_per_home").html(wood_cost_per_home);
 
-    $(".qty").html(qty);
+    $(".qty").html(metrify(qty));
 
     if (humans.delta > 0) {
         $(".humans.change_container").css({'color':'green'});
@@ -235,7 +238,7 @@ function available_from_qty(f, q) {
 }
 
 function setQty(x) {
-    qty = x;
+    qty = x > 0 ? x : 1;
     refresh_display();
 }
 
