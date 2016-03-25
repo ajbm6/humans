@@ -255,10 +255,10 @@ function metrify(x) {
 }
 
 function build_homes(qty) {
-    if (wood/wood_cost_per_home >= qty) {
-        wood -= qty*wood_cost_per_home;
-        homes += qty;
-    }
+    var can_afford = Math.floor(wood/wood_cost_per_home);
+    var will_build = can_afford >= qty ? qty : can_afford;
+    wood -= will_build * wood_cost_per_home;
+    homes += will_build;
 }
 
 /**
